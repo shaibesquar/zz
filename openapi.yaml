@@ -1,0 +1,812 @@
+openapi: 3.0.1
+info:
+  title: TickAPI
+  version: 1.0.0
+  description: |
+    asdg
+    sgsdg
+    sagsg
+    sdgd
+servers:
+  - url: 'https://'
+paths: 
+  /event:
+    get:
+      tags:
+        - events
+      summary: "Get a list of events"
+      description: ""
+      parameters: 
+          - $ref: '#/components/parameters/limit' 
+          - $ref: '#/components/parameters/offset'
+          - $ref: '#/components/parameters/evst'
+          - $ref: '#/components/parameters/tkst'
+          - $ref: '#/components/parameters/ven'
+          - $ref: '#/components/parameters/ha'           
+      responses:
+        200:
+          description: "Successfully retrieved event"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200'
+        default:
+          description: "Incorrect parameters"
+          content:
+            application/json:
+              schema:
+                title: "error"
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        enum: ["Parameter data type mismatch"]
+                        example: "Parameter data type mismatch"
+                      details: 
+                        type: string
+                        enum: ["offset parameter should be integer"]
+                        example: "offset parameter should be integer"
+    post:
+      tags:
+        - events
+      summary: "Create an event"  
+      description: ""
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/event'
+      responses:
+        201:
+          description: "Successfully created event"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200'
+        default:
+          description: "Incorrect parameters in request body"
+          content:
+            application/json:
+              schema:
+                title: "error"
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        enum: ["Missing  property"]
+                        example: "Missing  property"
+                      details:
+                        type: string
+                        enum: ["Missing eventName Property"]
+                        example: "Missing eventName Property"
+    put: 
+      tags:
+        - events
+      summary: "Modify an event if it exists or create it"
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/event'
+      responses:
+        201:
+          description: "Successfully modified event"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200'
+        default:
+          description: "Incorrect parameters in request body"
+          content:
+            application/json:
+              schema:
+                title: "error"
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Missing  property"
+                      details:
+                        type: string
+                        example: "Missing eventName Property" 
+  /event/{id}:
+    get:
+      tags: 
+        - events
+      summary: "Get an event"
+      parameters: 
+        - name: id
+          in: path
+          description: "Id of an event"
+          schema:
+            type: integer
+            default: 45
+          required: true
+      responses:
+        200:
+          description: "Successfully retrieved event"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+        404:
+          description: "Event not found"
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Not found"
+    delete:
+      tags: 
+        - events
+      summary: "Delete an event"
+      parameters: 
+        - name: id
+          in: path
+          description: "Id of an event"
+          schema:
+            type: integer
+            default: 45
+          required: true
+      responses:
+        201:
+          description: "Event deleted successfully"
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Event deleted"
+  /venue:
+    get:
+      tags:
+        - venues
+      summary: "Return a list of venues"
+      description: ""
+      parameters:
+        - $ref: '#/components/parameters/limit' 
+        - $ref: '#/components/parameters/offset'
+      responses:  
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: ""
+                  location:
+                    type: string
+                    example: ""
+        default:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message: 
+                        type: string
+                        enum: ["Parameter data type missmatch"]
+                        example: "Parameter data type missmatch"
+                      details:
+                        type: string
+                        enum: [""]
+                        example: ""
+    post:
+      tags: 
+        - venues
+      summary: ""
+      description: ""
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                  name: 
+                    type: string
+                    example: ""
+                  location:
+                    type: string
+                    example: 
+      responses:
+        201:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/venue'
+    put:
+      tags: 
+        - venues
+      summary: ""
+      description: ""
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: 
+                  type: string
+                  example: ""
+                location:
+                  type: string
+                  example:             
+      responses:
+        201:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/venue'              
+  /venue/{id}:
+    get:
+      tags: 
+        - venues
+      summary: ""
+      description: ""
+      parameters: 
+        - name: id
+          in: path
+          description: "Id of a venue"
+          schema:
+            type: integer
+          required: true
+      responses:
+        200: 
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/venue'
+        404:
+          description: "Venue not found"
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Not found"
+    delete:
+      tags: 
+        - venues
+      summary: ""
+      description: ""
+      parameters: 
+        - name: id
+          in: path
+          description: "Id of a venue"
+          schema:
+            type: integer
+          required: true 
+      responses:
+        201:
+          description: ""
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Venue deleted"
+  /hall:
+    get:
+      tags: 
+        - halls
+      summary: ""
+      description: ""
+      parameters: 
+        - $ref: '#/components/parameters/limit' 
+        - $ref: '#/components/parameters/offset'
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hall'
+        default:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message: 
+                        type: string
+                        enum: ["Parameter data type missmatch"]
+                        example: "Parameter data type missmatch"
+                      details:
+                        type: string
+                        enum: [""]
+                        example: ""
+    post:
+      tags: 
+        - halls
+      summary: ""
+      description: ""
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hall'
+      responses:
+        201:
+          description: ""
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/hall'
+        default:
+          description: ""
+          content:
+            application/json:
+              schema:
+                title: "error"
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        enum: ["Missing  property"]
+                        example: "Missing  property"
+                      details:
+                        type: string
+                        enum: ["Missing hallName Property"]
+                        example: "Missing hallName Property"
+    put:
+      tags:
+        - halls
+      summary: ""
+      description: ""
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hall'
+      responses:
+        201:
+          description: ""
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/hall'
+        default:
+          description: ""
+          content:
+            application/json:
+              schema:
+                title: "error"
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        enum: ["Missing  property"]
+                        example: "Missing  property"
+                      details:
+                        type: string
+                        enum: ["Missing hallName Property"]
+                        example: "Missing hallName Property"  
+  /hall{id}:
+    get:
+      tags:
+        - halls
+      summary: ""
+      description: ""
+      parameters: 
+        - name: id
+          in: path
+          description: "Id of a hall"
+          schema:
+            type: integer
+          required: true
+      responses:
+        200: 
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hall'
+        404:
+          description: "Hall not found"
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Not found"
+    delete:
+      tags: 
+        - halls
+      summary: ""
+      description: ""
+      parameters: 
+        - name: id
+          in: path
+          description: "Id of a venue"
+          schema:
+            type: integer
+          required: true 
+      responses:
+        201:
+          description: ""
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Venue deleted"      
+  /chart:
+    get:
+      tags: 
+        - charts
+      summary: ""
+      description: ""
+      parameters: 
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chart'
+        default:   
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message: 
+                        type: string
+                        enum: ["Parameter data type missmatch"]
+                        example: "Parameter data type missmatch"
+                      details:
+                        type: string
+                        enum: [""]
+                        example: ""
+    post:
+      tags:
+        - charts
+      summary: "" 
+      description: ""
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chart'
+      responses:
+        201:
+          description: ""
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/chart'
+        default:
+          description: ""
+          content:
+            application/json:
+              schema:
+                title: "error"
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        enum: ["Missing  property"]
+                        example: "Missing  property"
+                      details:
+                        type: string
+                        enum: ["Missing numofSeat Property"]
+                        example: "Missing numofSeat Property" 
+    put:
+      tags:
+        - charts
+      summary: ""
+      description: ""
+      responses:
+        201:
+          description: ""
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/chart'
+        default:
+          description: ""
+          content:
+            application/json:
+              schema:
+                title: "error"
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        enum: ["Missing  property"]
+                        example: "Missing  property"
+                      details:
+                        type: string
+                        enum: ["Missing numofSeat Property"]
+                        example: "Missing numofSeat Property"
+  /chart{id}:
+    get:
+      tags: 
+        - charts
+      summary: ""
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: "Id of a chart"
+          schema:
+            type: integer
+          required: true 
+      responses:
+        200: 
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chart'
+        404:
+          description: "Chart not found"
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Not found"
+    delete:
+      tags: 
+        - charts
+      summary: ""
+      description: ""
+      parameters: 
+        - name: id
+          in: path
+          description: "Id of a chart"
+          schema:
+            type: integer
+          required: true 
+      responses:
+        201:
+          description: ""
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Chart deleted"
+  /eventReport:
+    get:
+      tags:
+        - eventreports
+      summary: ""
+      description: ""
+      parameters:
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chart'
+        default:   
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message: 
+                        type: string
+                        enum: ["Parameter data type missmatch"]
+                        example: "Parameter data type missmatch"
+                      details:
+                        type: string
+                        enum: [""]
+                        example: ""        
+components:
+  parameters:
+     limit:
+       name: limit
+       in: query
+       description: "Number of objects to be returned"
+       schema:
+          type: integer
+          default: 20 
+     offset:      
+       name: offset
+       in: query
+       description: "Specifies where to start retrieving objects"
+       schema:
+          type: integer
+          default: 1
+     evst:      
+       name: evst
+       in: query
+       description: "Status of event"
+       schema:
+          type: string
+          enum: ["SCHEDULED","STOPPED","ON-HOLD","IN-PROGRESS","COMPLETED","CANCELLED"]
+          default: "SCHEDULED"   
+     tkst:    
+       name: tkst
+       in: query
+       description: "Status of ticket sale for the evnet"
+       schema:
+         type: string
+         enum: ["OPEN","CLOSED"]
+         default: "OPEN"    
+     ven:
+       name: ven
+       in: query
+       description: "Filters events by venue id"
+       schema:
+          type: integer
+          example: 2
+     ha:     
+       name: ha
+       in: query
+       description: "Filters events by hall id"
+       schema: 
+          type: integer
+          example: 23
+  schemas:
+    200:
+      title: Successful response
+      type: object
+      properties:
+        eventid:
+         type: integer
+         example: 45345
+        eventName:
+         type: string
+         example: "Birabiro"
+        eventDescription:
+         type: string
+         example: "A diplo concert"
+        startDate:
+         type: string
+         example: "Jan-08-20"
+        endDate: 
+         type: string
+         example: "Jan-08-20"
+        startTime:
+         type: string
+         example: "08:30:00"
+        endTime:
+         type: string
+         example: "12:00:00"
+        eventStatus:
+         type: string
+         enum: ["SCHEDULED","STOPPED","ON-HOLD","IN-PROGRESS","COMPLETED","CANCELLED"]
+         example: "SCHEDULED"
+        tickStat: 
+         type: string
+         enum: ["SCHEDULED","OPEN","CLOSED"]
+         example: "OPEN"
+        idHall:
+         type: integer
+         example: 34
+        idVenue:
+         type: integer
+         example: 56
+    venue:
+      title: ""
+      type: object
+      properties:
+        venueid: 
+          type: integer
+          example: 52
+        name: 
+          type: string
+          example: "Alem cinema"
+        location: 
+          type: string
+          example: ""
+    hall:
+      title: ""
+      type: object
+      properties:
+        hallid:
+          type: integer
+          example: 78
+        venueid:
+          type: integer
+          example: 34
+        venName:
+          type: string
+          example: ""
+        name:
+          type: string
+          example: ""
+        capacity:
+          type: integer
+          example: 200
+        hallType:
+          type: string
+          enum: [""]
+          example: ""
+    event:
+      title: event
+      type: object
+      properties:
+        eventName:
+          type: string
+          example: "Addis to Desse"
+        eventDescription:
+          type: string
+          example: "A trip from Addis Ababa to Desse"
+        startDate:
+          type: string
+          example: "Feb-28-20"
+        endDate:
+          type: string
+          example: "Mar-01-20"
+        startTime:
+          type: string
+          example: "07:00:00"
+        endTime:
+          type: string
+          example: "11:00:00"
+        eventStatus:
+          type: string
+          enum: ["SCHEDULED","STOPPED","ON-HOLD","IN-PROGRESS","COMPLETED","CANCELLED"]
+          example: "SCHEDULED"
+        tickStat:
+          type: string
+          enum: ["SCHEDULED","OPEN","CLOSED"]
+          example: "OPEN"
+    chart:
+      title: chart
+      type: object
+      properties:
+        numofSeat:
+          type: integer
+          example: 150
+    eventreport:
+      title: eventchart
+      type: object
+      properties:
+        
+
+                    
+                  

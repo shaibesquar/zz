@@ -1,0 +1,45 @@
+users
+getTicket{id}
+getTickets
+getTicketCode
+getVenue
+getHall
+getSeatingChart
+eventCreator
+getEvent
+validator
+seat
+
+
+
+
+create an event
+create multiple events
+get an event
+get a list of events by certain parameters
+update an event
+delete an event
+
+createVenue
+create multiple venues
+getVenue
+deleteVenue
+updateHall
+
+createHall
+create multiple halls
+getHall
+deleteHall
+updateHall
+
+get event report
+
+create seatingchart
+get seatingchart
+update seatingchart
+delete seatingchart
+
+create ticket
+getvalidator code
+
+authenticate
