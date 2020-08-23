@@ -7,8 +7,7 @@ create table ticket ( !-- will be generated after webhook call from payment api
    hallName varchar(20),
    --idseat integer,
    price integer,
-   type varchar(15),
-   
+   class integer
 );
 
 create table ticketBuyer (
@@ -51,9 +50,8 @@ create table event (
    idChart integer,
    eventType varchar(20),
    evstatus eventStatus,
-   tickStat ticketSaleStat
-
-   numofTick
+   tickStat ticketSaleStat,
+   numofTickClass integer
 );
 
 create table hall (
@@ -146,4 +144,5 @@ create table admin (
 -create table history (
 
 );
+
 

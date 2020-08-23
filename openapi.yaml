@@ -642,7 +642,73 @@ paths:
                       details:
                         type: string
                         enum: [""]
-                        example: ""        
+                        example: ""  
+  /ticket:
+    post:
+      tags:
+        - ticket
+      summary: ""
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                eventName:
+                  type: string
+                  example: ""
+                date:
+                  type: string
+                  example: ""
+                time:
+                  type: string
+                  example: ""
+                hallName:
+                  type: string
+                  example: ""
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                title: ""
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: ""
+                  eventName:
+                    type: string
+                    example: ""
+                  date:
+                    type: string
+                    example: ""
+                  time:
+                    type: string
+                    example: ""
+                  hallName:
+                    type: string
+                    example: ""
+        default:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        enum: [""]
+                        example: ""
+                      details:
+                        type: string
+                        enum: [""]
+                        example: ""
+    
 components:
   parameters:
      limit:
@@ -806,7 +872,14 @@ components:
       title: eventchart
       type: object
       properties:
-        
+        eventName:
+          type: string
+          example: "Despicable Me 2"
+        numofSoldTick:
+          type: integer
+          example: 148
+          
+          
 
                     
                   
