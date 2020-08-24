@@ -8,7 +8,7 @@ info:
     sagsg
     sdgd
 servers:
-  - url: 'https://'
+  - url: 'https://tickapi.herokuapp.com'
 paths: 
   /event:
     get:
